@@ -27,12 +27,13 @@
 <script>
     import {Toast} from 'mint-ui'
     import { Indicator } from 'mint-ui'
+    import axios from 'axios'
     export default {
         name: "Login",
         data () {
             return {
-                customer_num: '13333333332',
-                customer_password: '123456'
+                customer_num: '',
+                customer_password: ''
             }
         },
         mounted:function(){
@@ -67,10 +68,12 @@
                     mobile:this.customer_num,
                     password:this.customer_password
                 }
-
+// 
+                
                 let _this = this
-                axios.get(this.$store.state.globalhost+'account-service/user/login', {params:user}).then(function (response) {
+                axios.get(_this.$store.state.globalhost+'account-service/user/login', {params:user}).then(function (response) {
                     Indicator.close()
+                    console.error(response)
                     if(response.data.code == -1){
                         let instance = Toast(response.data.msg);
                         setTimeout(() => {
@@ -78,7 +81,7 @@
                         }, 1000)
                         return
                     }
-                    if(response.data.code == 0){
+                    if(response.data.code == 1){
                         localStorage.setItem('access-user', JSON.stringify(response.data.data));
                         _this.$router.replace({path: '/cart'})
                     }

@@ -30,6 +30,7 @@
 <script>
     import { MessageBox } from 'mint-ui';
     import { Toast } from 'mint-ui';
+    import axios from 'axios';
     export default {
         name: "orderDetail",
         data(){
@@ -44,6 +45,7 @@
             this.$store.state.index = 2
             const _this = this
             axios.get(this.$store.state.globalhost+'order-service/buyer/order/detail/'+JSON.parse(window.localStorage.getItem('access-user')).userId+'/'+this.$route.query.orderId).then(function (resp) {
+                console.error(resp.data)
                 _this.data = resp.data.data
                 _this.payStatus = resp.data.data.payStatus
                 _this.orderStatus = resp.data.data.orderStatus

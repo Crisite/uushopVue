@@ -1,5 +1,6 @@
 <template>
     <div class="mui-content">
+        {{ this.$store.state.selectedArray }}
         <form class="mui-input-group">
             <div class="mui-input-row">
                 <label>姓名</label>
@@ -23,6 +24,7 @@
 <script>
     import { Indicator } from 'mint-ui';
     import { Toast } from 'mint-ui';
+    import axios from 'axios'
     export default {
         data(){
             return {
@@ -65,7 +67,7 @@
 
                 Indicator.open('Loading...')
                 axios.post(this.$store.state.globalhost+'order-service/buyer/order/create',orderForm).then(function(resp){
-                    if(resp.data.code==0){
+                    if(resp.data.code==1){
                         Indicator.close()
                         _this.$router.push('/orderDetail?orderId='+resp.data.data.orderId)
                     }

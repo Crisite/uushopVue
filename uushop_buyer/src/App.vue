@@ -4,7 +4,9 @@
       <mt-button  icon="back" slot="left" @click="back">返回</mt-button>
     </mt-header>
     <router-view />
+    <!-- 导航栏 -->
     <nav class="mui-bar mui-bar-tab" id="bar-tab">
+      <!-- 根据store.state.index动态判断哪个div被选中 -->
       <div class="mui-tab-item" @click="$store.state.index=1;$router.push('/cart')">
         <span class="mui-icon mui-icon-compose" :class="{'mui-active':$store.state.index==1}"></span>
         <span class="mui-tab-label" :class="{'mui-text-active':$store.state.index==1}">购买</span>
@@ -98,6 +100,7 @@ nav a:first-of-type {
 
 </style>
 <script setup>
+import {Toast} from 'mint-ui'
 import axios from 'axios';
 import HelloWorld from './components/HelloWorld.vue'
 </script>
@@ -109,8 +112,9 @@ export default {
       return {
         isSelected: '1',
         isActive:false,
-        value:''
+        value:'',
         // index:2
+        test:'',
       }
     },
     methods: {

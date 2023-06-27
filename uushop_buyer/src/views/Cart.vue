@@ -68,6 +68,7 @@
 
 <script>
     import { Toast } from 'mint-ui';
+    import axios from 'axios';
     export default {
         name: "Cart",
         data() {
@@ -82,9 +83,10 @@
         created(){
             this.$store.state.index = 1;
             this.$store.state.selectedArray = [];
-            const _this = this
+            let _this = this
             axios.get(this.$store.state.globalhost+'product-service/buyer/product/list').then(function (resp) {
-                _this.data = resp.data.data
+                _this.data = resp.data
+                console.error(_this.data)
             })
         },
         methods: {

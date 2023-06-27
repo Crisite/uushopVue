@@ -12,6 +12,7 @@ import Pay from "../views/Pay.vue";
 
 Vue.use(VueRouter)
 
+// history模块(用于返回)
 const router = new VueRouter({
   mode: 'history',
   base: import.meta.env.BASE_URL,
@@ -70,6 +71,38 @@ const router = new VueRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
+})
+router.beforeEach((to, from, next) => {
+  if (to.path.startsWith('/login')) {
+    window.localStorage.removeItem('access-user')
+    next()
+  } else if(to.path.startsWith('/register')){
+    next()
+  }
+  else {
+    let user = JSON.parse(window.localStorage.getItem('access-user'))
+    if (!user) {
+      next({path: '/login'})
+    } else {
+      //校验token
+      // axios({
+      //   url:'http://localhost:8686/account-service/user/checkToken',
+      //   method:'get',
+      //   headers:{
+      //     token:user.token
+      //   }
+      // }).then((response) => {
+      //   if(response.data.code == -1){
+      //     let instance = Toast('登录超时！请重新登录！');
+      //     setTimeout(() => {
+      //       instance.close();
+      //     }, 2000)
+      //     next({path: '/login'})
+      //   }
+      // })
+      next()
+    }
+  }
 })
 
 export default router
