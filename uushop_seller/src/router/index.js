@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-// import 'element-ui'
-// import 'element-ui/lib/theme-chalk/index.css'
 import ProductManage from '../views/ProductManage.vue'
 import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
@@ -23,26 +21,26 @@ const router = new VueRouter({
       path: '/',
       name: '商品模块',
       icon: 'el-icon-goods',
-      component: {render: (e) => e("router-view")},
+      component: HomeView,
       show:true,
       redirect:'/productManage',
       children:[
         {
-          path: '/productManage',
+          path: 'productManage',
           name: '商品管理',
           icon: 'el-icon-s-unfold',
           show:true,
           component: ProductManage
         },
         {
-          path: '/addProduct',
+          path: 'addProduct',
           name: '添加商品',
           icon:'el-icon-circle-plus',
           show:true,
           component: AddProduct
         },
         {
-          path: '/editProduct',
+          path: 'editProduct',
           name: '修改商品',
           show:false,
           component: EditProduct

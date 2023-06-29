@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HomeView/>
+    <router-view/>
     <audio hidden id="notice" :src="music"></audio>
   </div>
 </template>
