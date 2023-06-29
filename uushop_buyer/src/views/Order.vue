@@ -33,7 +33,6 @@ import axios from 'axios'
             const _this = this
             axios.get(this.$store.state.globalhost+'order-service/buyer/order/list/'+JSON.parse(window.localStorage.getItem('access-user')).userId+'/1/100').then(function (resp) {
                 _this.data = resp.data.data
-                console.error(_this.data)
             })
         },
         methods:{

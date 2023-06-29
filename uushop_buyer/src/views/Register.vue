@@ -47,29 +47,30 @@
             this.$store.state.index = 1
         },
         methods:{
-            code(){
-                if(!this.customer_num){
-                    let instance = Toast('请输入手机号');
-                    setTimeout(() => {
-                        instance.close();
-                    }, 1000)
-                    return
-                }
-                axios.get(this.$store.state.globalhost+'sms-service/sms/send/'+this.customer_num).then(function (resp) {
-                    if(resp.data.code == 0){
-                        let instance = Toast('短信发送成功');
-                        setTimeout(() => {
-                            instance.close();
-                        }, 1000)
-                    }else{
-                        let instance = Toast(resp.data.msg);
-                        setTimeout(() => {
-                            instance.close();
-                        }, 1000)
-                    }
-                })
+            // 暂无短信功能
+            // code(){
+            //     if(!this.customer_num){
+            //         let instance = Toast('请输入手机号');
+            //         setTimeout(() => {
+            //             instance.close();
+            //         }, 1000)
+            //         return
+            //     }
+            //     axios.get(this.$store.state.globalhost+'sms-service/sms/send/'+this.customer_num).then(function (resp) {
+            //         if(resp.data.code == 0){
+            //             let instance = Toast('短信发送成功');
+            //             setTimeout(() => {
+            //                 instance.close();
+            //             }, 1000)
+            //         }else{
+            //             let instance = Toast(resp.data.msg);
+            //             setTimeout(() => {
+            //                 instance.close();
+            //             }, 1000)
+            //         }
+            //     })
 
-            },
+            // },
             register(){
                 if(!this.customer_num){
                     let instance = Toast('请输入账号');
@@ -99,8 +100,11 @@
                     password:this.customer_password
                 }
                 let _this = this
-                axios.post(this.$store.state.globalhost+'account-service/user/register',user).then(function (response) {
-                    if(response.data.code == 0){
+                this.axios.post(this.$store.state.globalhost+'account-service/user/register',user).then(function (response) {
+                    console.error(response)
+                    console.error(response.data.code)
+                    if(response.data.code == 1){
+                        console.error('yes')
                         let instance = Toast('注册成功');
                         setTimeout(() => {
                             instance.close()
