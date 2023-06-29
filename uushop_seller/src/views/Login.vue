@@ -47,43 +47,31 @@
         },
         methods: {
             handleSubmit(){
-                // this.$refs.ruleForm.validate((valid) => {
-                //     if(valid){
-                //         this.logining = true
-                //         let _this = this
-                //         axios.get(this.$store.state.globalhost+'account-service/admin/login', {params:_this.ruleForm}).then(function (response) {
-                //             _this.logining = false
-                //             if(response.data.code == -1){
-                //                 _this.$alert(response.data.msg, '提示', {
-                //                     confirmButtonText: '确定'
-                //                 })
-                //             }
-                //             if(response.data.code == 0){
-                //                 localStorage.setItem('access-admin', JSON.stringify(response.data.data));
-                //                 _this.$router.replace({path: '/'})
-                //             }
-                //         })
-                //     }else{
-                //         console.log('error submit!');
-                //         return false;
-                //     }
-                // })
-
                 this.$refs.ruleForm.validate((valid) => {
                     if(valid){
-                        let admin = {
-                            username:'admin',
-                            password:'123123',
-                            imgUrl:'https://img1.baidu.com/it/u=1026177128,203298668&fm=26&fmt=auto&gp=0.jpg',
-                            name:'超级玛丽'
-                        }
-
-                        localStorage.setItem('access-admin', JSON.stringify(admin));
-                        this.$router.replace({path: '/'})
+                        this.logining = true
+                        let _this = this
+                        this.axios.post(this.$store.state.globalhost+'account-service/admin/login', this.ruleForm).then(function (response) {
+                            _this.logining = false
+                            console.error(response.data)
+                            if(response.data.code == -1){
+                                _this.$alert(response.data.msg, '提示', {
+                                    confirmButtonText: '确定'
+                                })
+                            }
+                            if(response.data.code == 1){
+                                localStorage.setItem('access-admin', JSON.stringify(response.data.data));
+                                _this.$router.replace({path: '/'})
+                            }
+                        })
+                    }else{
+                        console.log('error submit!');
+                        return false;
                     }
                 })
             }
         }
+        
     };
 </script>
 

@@ -111,7 +111,7 @@
             },
             page(currentPage){
                 const _this = this
-                axios.get(this.$store.state.globalhost+'order-service/seller/order/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
+                this.axios.get(this.$store.state.globalhost+'order-service/seller/order/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
                     _this.tableData = resp.data.data.content
                     _this.pageSize = resp.data.data.size
                     _this.total = resp.data.data.total
@@ -119,7 +119,7 @@
             },
             cancel(row) {
                 const _this = this
-                axios.put(this.$store.state.globalhost+'order-service/seller/order/cancel/'+row.orderId).then(function (resp) {
+                this.axios.put(this.$store.state.globalhost+'order-service/seller/order/cancel/'+row.orderId).then(function (resp) {
                     if(resp.data.code == 1){
                         _this.$alert('订单【'+row.orderId+'】状态异常', '错误', {
                             confirmButtonText: '确定'
@@ -146,7 +146,7 @@
                     });
                 }else{
                     const _this = this
-                    axios.put(this.$store.state.globalhost+'order-service/seller/order/finish/'+row.orderId).then(function (resp) {
+                    this.axios.put(this.$store.state.globalhost+'order-service/seller/order/finish/'+row.orderId).then(function (resp) {
                         if(resp.data.code == 1){
                             _this.$alert('订单【'+row.orderId+'】状态异常', '错误', {
                                 confirmButtonText: '确定'
@@ -166,7 +166,7 @@
         },
         created() {
             const _this = this
-            axios.get(this.$store.state.globalhost+'order-service/seller/order/list/1/'+_this.pageSize).then(function (resp) {
+            this.axios.get(this.$store.state.globalhost+'order-service/seller/order/list/1/'+_this.pageSize).then(function (resp) {
                 _this.tableData = resp.data.data.content
                 _this.pageSize = resp.data.data.size
                 _this.total = resp.data.data.total

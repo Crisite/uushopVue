@@ -6,13 +6,9 @@
 </template>
 
 <script>
-  import HelloWorld from './components/HelloWorld.vue'
-  import HomeView from './views/HomeView.vue'
   export default {
     name: 'app',
     components: {
-      HelloWorld,
-      HomeView
     },
 
     data() {
