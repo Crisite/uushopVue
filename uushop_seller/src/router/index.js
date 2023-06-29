@@ -23,7 +23,7 @@ const router = new VueRouter({
       path: '/',
       name: '商品模块',
       icon: 'el-icon-goods',
-      component: HomeView,
+      component: {render: (e) => e("router-view")},
       show:true,
       redirect:'/productManage',
       children:[

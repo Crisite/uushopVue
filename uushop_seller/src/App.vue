@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+    <HomeView/>
     <audio hidden id="notice" :src="music"></audio>
   </div>
 </template>
 
 <script>
   import HelloWorld from './components/HelloWorld.vue'
-
+  import HomeView from './views/HomeView.vue'
   export default {
     name: 'app',
     components: {
-      HelloWorld
+      HelloWorld,
+      HomeView
     },
 
     data() {
@@ -46,6 +47,10 @@
         console.log('连接关闭');
       }
     },
+    beforeCreate() {
+      document.querySelector('body').setAttribute('min-width', '100vh;')
+      document.querySelector('html').setAttribute('min-width', '100vh;')
+    },
     created() {
       this.initWebSocket();
     },
@@ -66,9 +71,9 @@
     position:absolute;
     top:0;
     left:0;
+    right: 0;
+    bottom: 0;
     height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
   }
 </style>

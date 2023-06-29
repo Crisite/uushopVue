@@ -29,8 +29,28 @@
             </el-menu-item>
           </el-submenu>
         </el-menu>
-      </el-aside>
-
+        <!-- <el-menu router>
+          <el-submenu index="1">
+            <template slot="title">菜单1</template>
+            <el-menu-item index="/productManage">
+              <div style="position: relative;left: 20px;" >
+                  <i></i>productmanage
+              </div>
+            </el-menu-item>
+            <el-menu-item index="/addProduct">
+              <div style="position: relative;left: 20px;" >
+                  <i></i>addProduct
+              </div>
+            </el-menu-item>
+            <el-menu-item index="/editProduct">
+              <div style="position: relative;left: 20px;" >
+                  <i></i>editProduct
+              </div>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu> -->
+      </el-aside> 
+ 
       <el-container>
         <el-main>
           <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -95,7 +115,7 @@
 </script>
 <style>
   .test {
-    /* position: absolute; */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
