@@ -10,6 +10,7 @@ import BasicLine from '../views/BasicLine.vue'
 import StackedLine from '../views/StackedLine.vue'
 import Login from '../views/Login.vue'
 import Error from '../views/Error.vue'
+import axios from 'axios'
 
 Vue.use(VueRouter)
 
@@ -108,6 +109,32 @@ const router = new VueRouter({
       component: Error
     }
   ]
+})
+router.beforeEach((to, from, next) => {
+  if (to.path.startsWith('/login')) {
+    window.localStorage.removeItem('access-admin')
+    next()
+  } else {
+    let admin = JSON.parse(window.localStorage.getItem('access-admin'))
+    if (!admin) {
+      next({path: '/login'})
+    } else {
+      //校验token合法性
+      axios({
+        url:'http://localhost:8686/account-service/admin/checkToken/'+admin.token,
+        method:'get',
+        headers:{
+          token:admin.token
+        }
+      }).then((response) => {
+        if(response.data.code == -1){
+          console.log('校验失败')
+          next({path: '/error'})
+        }
+      })
+      next()
+    }
+  }
 })
 
 export default router
