@@ -29,26 +29,6 @@
             </el-menu-item>
           </el-submenu>
         </el-menu>
-        <!-- <el-menu router>
-          <el-submenu index="1">
-            <template slot="title">菜单1</template>
-            <el-menu-item index="/productManage">
-              <div style="position: relative;left: 20px;" >
-                  <i></i>productmanage
-              </div>
-            </el-menu-item>
-            <el-menu-item index="/addProduct">
-              <div style="position: relative;left: 20px;" >
-                  <i></i>addProduct
-              </div>
-            </el-menu-item>
-            <el-menu-item index="/editProduct">
-              <div style="position: relative;left: 20px;" >
-                  <i></i>editProduct
-              </div>
-            </el-menu-item>
-          </el-submenu>
-        </el-menu> -->
       </el-aside> 
  
       <el-container>
@@ -84,27 +64,27 @@
     mounted: function () {
       let admin = JSON.parse(window.localStorage.getItem('access-admin'))
         this.admin = admin
-      // let _this = this
-      // //首先需要校验token合法性
-      // axios({
-      //   url:this.$store.state.globalhost+'account-service/admin/checkToken',
-      //   method:'get',
-      //   headers:{
-      //     token:admin.token
-      //   }
-      // }).then((response) => {
-      //   if(response.data.code == 0){
-      //     this.admin = admin
-      //   }
-      //   if(response.data.code == -1){
-      //     _this.$alert(response.data.msg, '提示', {
-      //       confirmButtonText: '确定'
-      //     }).then((response) => {
-      //       localStorage.removeItem('access-admin')
-      //       _this.$router.replace({path: '/login'})
-      //     })
-      //   }
-      // })
+      let _this = this
+      //首先需要校验token合法性
+      this.axios({
+        url:this.$store.state.globalhost+'account-service/admin/checkToken/'+admin.token,
+        method:'get',
+        headers:{
+          token:admin.token
+        }
+      }).then((response) => {
+        if(response.data.code == 0){
+          this.admin = admin
+        }
+        if(response.data.code == -1){
+          _this.$alert(response.data.msg, '提示', {
+            confirmButtonText: '确定'
+          }).then((response) => {
+            localStorage.removeItem('access-admin')
+            _this.$router.replace({path: '/login'})
+          })
+        }
+      })
     },
     data(){
       return {
