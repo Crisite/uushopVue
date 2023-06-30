@@ -165,13 +165,13 @@
                 _this.currentPage=1
                 _this.selectedCategory=''
                 if(_this.keyWord == ''){
-                    axios.get(this.$store.state.globalhost+'product-service/seller/product/list/1/'+_this.pageSize).then(function (resp) {
+                    this.axios.get(this.$store.state.globalhost+'product-service/seller/product/list/1/'+_this.pageSize).then(function (resp) {
                         _this.tableData = resp.data.data.content
                         _this.pageSize = resp.data.data.size
                         _this.total = resp.data.data.total
                     })
                 }else{
-                    axios.get(this.$store.state.globalhost+'product-service/seller/product/like/'+_this.keyWord+'/1/'+_this.pageSize).then(function (resp) {
+                    this.axios.get(this.$store.state.globalhost+'product-service/seller/product/like/'+_this.keyWord+'/1/'+_this.pageSize).then(function (resp) {
                         _this.tableData = resp.data.data.content
                         _this.pageSize = resp.data.data.size
                         _this.total = resp.data.data.total
@@ -190,7 +190,7 @@
                         type: 'error'
                     })
                 }
-                axios.get(this.$store.state.globalhost+'product-service/seller/product/findByCategory/'+_this.selectedCategory+'/1/'+_this.pageSize).then(function (resp) {
+                this.axios.get(this.$store.state.globalhost+'product-service/seller/product/findByCategory/'+_this.selectedCategory+'/1/'+_this.pageSize).then(function (resp) {
                     // console.log(resp.data.data)
                     _this.tableData = resp.data.data.content
                     _this.pageSize = resp.data.data.size
@@ -200,19 +200,19 @@
             page(currentPage){
                 const _this = this
                 if(_this.keyWord != ''){
-                    axios.get(this.$store.state.globalhost+'product-service/seller/product/like/'+_this.keyWord+'/'+currentPage+'/'+_this.pageSize).then(function (resp) {
+                    this.axios.get(this.$store.state.globalhost+'product-service/seller/product/like/'+_this.keyWord+'/'+currentPage+'/'+_this.pageSize).then(function (resp) {
                         _this.tableData = resp.data.data.content
                         _this.pageSize = resp.data.data.size
                         _this.total = resp.data.data.total
                     })
                 }else if(_this.selectedCategory != ''){
-                    axios.get(this.$store.state.globalhost+'product-service/seller/product/findByCategory/'+_this.selectedCategory+'/'+currentPage+'/'+_this.pageSize).then(function (resp) {
+                    this.axios.get(this.$store.state.globalhost+'product-service/seller/product/findByCategory/'+_this.selectedCategory+'/'+currentPage+'/'+_this.pageSize).then(function (resp) {
                         _this.tableData = resp.data.data.content
                         _this.pageSize = resp.data.data.size
                         _this.total = resp.data.data.total
                     })
                 }else {
-                    axios.get(this.$store.state.globalhost+'product-service/seller/product/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
+                    this.axios.get(this.$store.state.globalhost+'product-service/seller/product/list/'+currentPage+'/'+_this.pageSize).then(function (resp) {
                         _this.tableData = resp.data.data.content
                         _this.pageSize = resp.data.data.size
                         _this.total = resp.data.data.total
@@ -229,7 +229,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    axios.delete(this.$store.state.globalhost+'product-service/seller/product/delete/'+row.id).then(function (resp) {
+                    this.axios.delete(this.$store.state.globalhost+'product-service/seller/product/delete/'+row.id).then(function (resp) {
                         if(resp.data.code==0){
                             _this.$alert('【'+row.name+'】已删除', '', {
                                 confirmButtonText: '确定',
@@ -248,7 +248,7 @@
             },
             changeSwitch (data) {
                 const _this = this
-                axios.put(this.$store.state.globalhost+'product-service/seller/product/updateStatus/'+data.id+'/'+data.status).then(function (resp) {
+                this.axios.put(this.$store.state.globalhost+'product-service/seller/product/updateStatus/'+data.id+'/'+data.status).then(function (resp) {
                     console.log(resp.data.data)
                     if(resp.data.data == true){
                         _this.$message({
@@ -268,48 +268,15 @@
         },
 
         created() {
-            // const _this = this
-            // axios.get(this.$store.state.globalhost+'product-service/seller/product/list/1/'+_this.pageSize).then(function (resp) {
-            //     _this.tableData = resp.data.data.content
-            //     _this.pageSize = resp.data.data.size
-            //     _this.total = resp.data.data.total
-            // })
-            // axios.get(this.$store.state.globalhost+'product-service/seller/product/findAllProductCategory').then(function (resp) {
-            //     _this.category = resp.data.data.content
-            // })
-
-            this.tableData = [
-                {
-                    "status": true,
-                    "id": 1,
-                    "name": "肉夹馍",
-                    "price": 16,
-                    "stock": 107,
-                    "description": "好吃好吃",
-                    "icon": "https://s1.st.meishij.net/rs/50/123/6030800/n6030800_152708155351112.jpg",
-                    "categoryName": "热销榜"
-                },
-                {
-                    "status": false,
-                    "id": 2,
-                    "name": "肉夹馍",
-                    "price": 16,
-                    "stock": 107,
-                    "description": "好吃好吃",
-                    "icon": "https://s1.st.meishij.net/rs/50/123/6030800/n6030800_152708155351112.jpg",
-                    "categoryName": "热销榜"
-                },
-                {
-                    "status": true,
-                    "id": 3,
-                    "name": "肉夹馍",
-                    "price": 16,
-                    "stock": 107,
-                    "description": "好吃好吃",
-                    "icon": "https://s1.st.meishij.net/rs/50/123/6030800/n6030800_152708155351112.jpg",
-                    "categoryName": "热销榜"
-                }
-            ]
+            const _this = this
+            this.axios.get(this.$store.state.globalhost+'product-service/seller/product/list/1/'+_this.pageSize).then(function (resp) {
+                _this.tableData = resp.data.data.content
+                _this.pageSize = resp.data.data.size
+                _this.total = resp.data.data.total
+            })
+            this.axios.get(this.$store.state.globalhost+'product-service/seller/product/findAllProductCategory').then(function (resp) {
+                _this.category = resp.data.data.content
+            })
             this.pageSize = 5
             this.total = 11
         }

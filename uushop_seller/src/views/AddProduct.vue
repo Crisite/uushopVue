@@ -101,7 +101,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         console.log(_this.ruleForm)
-                        axios.post(this.$store.state.globalhost+'product-service/seller/product/add',_this.ruleForm).then(function(resp){
+                        this.axios.post(this.$store.state.globalhost+'product-service/seller/product/add',_this.ruleForm).then(function(resp){
                             if(resp.data.code == 0){
                                 _this.$alert(_this.ruleForm.productName+'添加成功', '', {
                                     confirmButtonText: '确定',
@@ -120,7 +120,7 @@
         },
         created() {
             const _this = this
-            axios.get(this.$store.state.globalhost+'product-service/seller/product/findAllProductCategory').then(function(resp){
+           this. axios.get(this.$store.state.globalhost+'product-service/seller/product/findAllProductCategory').then(function(resp){
                 _this.category = resp.data.data.content
             })
         }
