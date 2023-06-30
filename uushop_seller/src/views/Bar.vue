@@ -8,7 +8,7 @@
         name: "Pie",
         mounted(){
             let _this = this
-            axios.get(this.$store.state.globalhost+'order-service/seller/order/barSale').then(function (response) {
+            this.axios.get(this.$store.state.globalhost+'order-service/seller/order/barSale').then(function (response) {
                 _this.drawLine(response.data.data);
             })
         },

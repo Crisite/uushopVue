@@ -7,7 +7,7 @@
         name: "Line",
         mounted(){
             let _this = this
-            axios.get(this.$store.state.globalhost+'order-service/seller/order/basicLineSale').then(function (response) {
+            this.axios.get(this.$store.state.globalhost+'order-service/seller/order/basicLineSale').then(function (response) {
                 _this.drawLine(response.data.data);
             })
         },
