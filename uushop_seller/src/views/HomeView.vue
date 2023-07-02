@@ -67,7 +67,7 @@
       let _this = this
       //首先需要校验token合法性
       this.axios({
-        url:this.$store.state.globalhost+'account-service/admin/checkToken/'+admin.token,
+        url:this.$store.state.globalhost+'account-service/admin/checkToken',
         method:'get',
         headers:{
           token:admin.token
